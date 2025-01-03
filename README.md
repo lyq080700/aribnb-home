@@ -1,8 +1,8 @@
 #### 技术栈：next.js + TailWind CSS + Redux + scss + mockjs + axios + dayjs + antd
 
-## 项目启动
+## 项目启动 仿 aribnb 搜索框实现
 
-安装并允许项目
+安装并运行项目
 
 ```bash
 npm install

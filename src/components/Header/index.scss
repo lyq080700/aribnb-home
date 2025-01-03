@@ -1,0 +1,32 @@
+.search-divider {
+  position: absolute;
+  top: 50%;
+  right: -1px;
+  transform: translateY(-50%);
+  display: block;
+  border-right: 1px solid #ddd;
+  height: 50%;
+}
+.search-box:has(.address:hover) > .address .search-divider,
+.search-box:has(.time:hover) > .address .search-divider,
+.search-box:has(.time:hover) > .time .search-divider,
+.search-box:has(.people:hover) > .time .search-divider {
+  visibility: hidden;
+}
+.people .search-button{
+  position: absolute;
+  top: 50%;
+  right: 9px;
+  transform: translateY(-50%);
+}
+.ant-picker{
+  padding: 0px !important;
+  border: none !important;
+  background-color: transparent !important;
+}
+.ant-picker-dropdown{
+  @media screen and (max-width: 768px) {
+    left:10% !important;
+    // max-width: 300px !important;
+  }
+}

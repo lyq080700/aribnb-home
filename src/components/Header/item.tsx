@@ -7,6 +7,14 @@ import "dayjs/locale/zh-cn";
 
 dayjs.locale("zh-cn");
 const { RangePicker } = DatePicker;
+type ItemProps = {
+  title: string;
+  placholder: string;
+  className?: string;
+  inputNeed?: boolean;
+  value: string;
+  setValue?: (value:string,date?:Date) => void;
+}
 export default function Item({
   title,
   placholder,
@@ -14,7 +22,7 @@ export default function Item({
   inputNeed,
   value,
   setValue,
-}) {
+}:ItemProps):React.ReactElement {
   return (
     <div
       className={`px-6 py-3 cursor-pointer hover:bg-[#EBEBEB] hover:rounded-[32px] ${className}`}

@@ -4,18 +4,36 @@ import Card from "../CardContainer";
 import { useDispatch } from "react-redux";
 import { setParams } from "@/store/searchStore";
 import { setRoom } from "@/store/roomStore";
-import { useSelector } from "react-redux";
+import { useTypedSelector } from "@/store";
 import { getRoomDataAPI } from "@/api/api";
 import dayjs from "dayjs";
+import { SearchParamsInterface } from "@/types/entity";
 import {
   SearchOutlined,
   MinusCircleOutlined,
   PlusCircleOutlined,
 } from "@ant-design/icons";
-export default function People(props) {
-  const searchParams = useSelector((state) => state.searchParams);
+type PeopleProps = {
+  handlePeople: () => void;
+  setPeopleActive: (active: boolean) => void;
+  setAddressActive: (active: boolean) => void;
+  peopleClass: string;
+  peopleText: string;
+  isMobile: boolean;
+  activated: boolean;
+}
+type PeopleItem = SearchParamsInterface["people"]
+type PeopleOptionsProps = {
+  peopleActive: boolean;
+  people: PeopleItem;
+  setPeople: (people: PeopleItem) => void;
+  isMobile: boolean;
+  setPeopleText: (text: string) => void;
+}
+export default function People(props:PeopleProps&PeopleOptionsProps) {
+  const searchParams = useTypedSelector((state) => state.searchParams);
   const dispatch = useDispatch();
-  const handleSearch = async (searchParams, e) => {
+  const handleSearch = async (searchParams:SearchParamsInterface, e:React.MouseEvent) => {
     props.setPeopleActive(false);
     props.setAddressActive(false);
     e.stopPropagation();
@@ -68,34 +86,31 @@ export default function People(props) {
   );
 }
 
-function PeopleOptions(props) {
-  const searchParams = useSelector((state) => state.searchParams);
+const enum PeopleType {
+  Adult = "adult",
+  Child = "child",
+  Infant = "infant",
+  Pet = "pet",
+}
+
+function PeopleOptions(props:PeopleOptionsProps) {
+  const searchParams = useTypedSelector((state) => state.searchParams);
   const dispatch = useDispatch();
   const btactivateClass = "#c8c8c8";
   const btdeactivateClass = "#f4f4f4";
   //人数选择
-  const handlePeopleText = (flag, text, num) => {
-    let resText = text;
-    if (flag === "infant") {
-      resText = text + num === 0 ? "" : num + "名婴儿";
-    } else if (flag === "pet") {
-      resText = text + num === 0 ? "" : num + "只宠物";
-    } else {
-      resText = text + num === 0 ? "" : num + "位房客";
-    }
-    return resText;
-  };
-  const handleMinus = (e, flag) => {
+  
+  const handleMinus = (e: React.MouseEvent, flag:PeopleType) => {
     e.stopPropagation();
     if (props.people[flag] == 0) {
       return;
     }
     if (
-      (props.people["infant"] > 0 ||
-        props.people["pet"] > 0 ||
-        props.people["child"] > 0) &&
-      flag === "adult" &&
-      props.people["adult"] <= 1
+      (props.people[PeopleType.Infant] > 0 ||
+        props.people[PeopleType.Pet] > 0 ||
+        props.people[PeopleType.Child] > 0) &&
+      flag === PeopleType.Adult &&
+      props.people[PeopleType.Adult] <= 1
     ) {
       return;
     }
@@ -110,10 +125,10 @@ function PeopleOptions(props) {
     );
     props.setPeople({ ...props.people, [flag]: props.people[flag] - 1 });
     let num =
-      props.people["adult"] +
-      props.people["child"] +
-      props.people["infant"] +
-      props.people["pet"] -
+      props.people[PeopleType.Adult] +
+      props.people[PeopleType.Child] +
+      props.people[PeopleType.Infant] +
+      props.people[PeopleType.Pet] -
       1;
     // if (flag === "adult" || flag === "child") {
     //   num = people["adult"] + people["child"] - 1;
@@ -123,20 +138,20 @@ function PeopleOptions(props) {
     // const res = handlePeopleText(flag, peopleText, num);
     props.setPeopleText(num === 0 ? "" : num + "位房客");
   };
-  const handlePlus = (e, flag) => {
+  const handlePlus = (e: React.MouseEvent, flag:PeopleType): void => {
     let num = 0;
     e.stopPropagation();
-    if (flag === "adult" && props.people[flag] >= 15) {
+    if (flag === PeopleType.Adult && props.people[flag] >= 15) {
       return;
     }
-    if (flag === "child" && props.people[flag] >= 10) {
+    if (flag === PeopleType.Child && props.people[flag] >= 10) {
       return;
     }
-    if ((flag === "infant" || flag === "pet") && props.people[flag] >= 3) {
+    if ((flag === PeopleType.Infant || flag === PeopleType.Pet) && props.people[flag] >= 3) {
       return;
     }
     if (
-      (flag === "infant" || flag === "pet" || flag === "child") &&
+      (flag === PeopleType.Infant || flag === PeopleType.Pet || flag === PeopleType.Child) &&
       props.people.adult === 0
     ) {
       console.log("adult", { ...props.people, adult: props.people.adult + 1 });
@@ -170,10 +185,10 @@ function PeopleOptions(props) {
     }
 
     num +=
-      props.people["adult"] +
-      props.people["child"] +
-      props.people["infant"] +
-      props.people["pet"] +
+      props.people[PeopleType.Adult] +
+      props.people[PeopleType.Child] +
+      props.people[PeopleType.Infant] +
+      props.people[PeopleType.Pet] +
       1;
     // if (flag === "adult" || flag === "child") {
     //   num = people["adult"] + people["child"] + 1;
@@ -185,7 +200,7 @@ function PeopleOptions(props) {
   };
 
   //控制成人人数选择
-  const adultOptions = () => {
+  const adultOptions = (): boolean => {
     if (
       (props.people.child > 0 ||
         props.people.infant > 0 ||
@@ -213,7 +228,7 @@ function PeopleOptions(props) {
           <div className="grid grid-cols-3">
             <div
               className={`cursor-pointer`}
-              onClick={(e) => handleMinus(e, "adult")}
+              onClick={(e) => handleMinus(e, PeopleType.Adult)}
             >
               <MinusCircleOutlined
                 style={{
@@ -225,7 +240,7 @@ function PeopleOptions(props) {
             <div className="text-center leading-8">{props.people.adult}</div>
             <div
               className={`cursor-pointer`}
-              onClick={(e) => handlePlus(e, "adult")}
+              onClick={(e) => handlePlus(e, PeopleType.Adult)}
             >
               <PlusCircleOutlined
                 style={{
@@ -249,7 +264,7 @@ function PeopleOptions(props) {
           <div className="grid grid-cols-3">
             <div
               className={`cursor-pointer`}
-              onClick={(e) => handleMinus(e, "child")}
+              onClick={(e) => handleMinus(e, PeopleType.Child)}
             >
               <MinusCircleOutlined
                 style={{
@@ -264,7 +279,7 @@ function PeopleOptions(props) {
             <div className="text-center leading-8">{props.people.child}</div>
             <div
               className={`cursor-pointer`}
-              onClick={(e) => handlePlus(e, "child")}
+              onClick={(e) => handlePlus(e, PeopleType.Child)}
             >
               <PlusCircleOutlined
                 style={{
@@ -288,7 +303,7 @@ function PeopleOptions(props) {
           <div className="grid grid-cols-3">
             <div
               className={`cursor-pointer`}
-              onClick={(e) => handleMinus(e, "infant")}
+              onClick={(e) => handleMinus(e, PeopleType.Infant)}
             >
               <MinusCircleOutlined
                 style={{
@@ -303,7 +318,7 @@ function PeopleOptions(props) {
             <div className="text-center leading-8">{props.people.infant}</div>
             <div
               className={`cursor-pointer`}
-              onClick={(e) => handlePlus(e, "infant")}
+              onClick={(e) => handlePlus(e, PeopleType.Infant)}
             >
               <PlusCircleOutlined
                 style={{
@@ -329,7 +344,7 @@ function PeopleOptions(props) {
           <div className="grid grid-cols-3">
             <div
               className={`cursor-pointer`}
-              onClick={(e) => handleMinus(e, "pet")}
+              onClick={(e) => handleMinus(e, PeopleType.Pet)}
             >
               <MinusCircleOutlined
                 style={{
@@ -342,7 +357,7 @@ function PeopleOptions(props) {
             <div className="text-center leading-8">{props.people.pet}</div>
             <div
               className={`cursor-pointer`}
-              onClick={(e) => handlePlus(e, "pet")}
+              onClick={(e) => handlePlus(e, PeopleType.Pet)}
             >
               <PlusCircleOutlined
                 style={{

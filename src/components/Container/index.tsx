@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
 import Card from "../CardWithPic";
-import { useSelector } from "react-redux";
+import { useTypedSelector } from "@/store";
 import { getAllRoomDataAPI } from "@/api/api";
 import { useDispatch } from "react-redux";
 import { setRoom } from "@/store/roomStore";
 import { Empty, Typography, Spin } from "antd";
 import "./index.scss";
 
-export default function Container({ className }) {
-  const roomList = useSelector((state) => state.room);
-  const searchParams = useSelector((state) => state.searchParams);
+export default function Container({ className }:{ className?: string}):React.ReactElement {
+  const roomList = useTypedSelector((state) => state.room);
+  const searchParams = useTypedSelector((state) => state.searchParams);
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
   //获取房源数据
   const getRoomData = async () => {
-    const res = await getAllRoomDataAPI();
+    const res  = await getAllRoomDataAPI();
     dispatch(setRoom(res));
   };
 

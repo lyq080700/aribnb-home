@@ -1,4 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice,PayloadAction } from "@reduxjs/toolkit";
+import { SearchParamsInterface } from "@/types/entity";
+type SearchStoreType = {
+  name: string;
+  initialState: SearchParamsInterface;
+  reducers: {
+    setParams: (state: SearchParamsInterface, action: PayloadAction<SearchParamsInterface>) => void;
+  }
+}
 export const searchStore = createSlice({
   name: "searchParams",
   initialState: {
@@ -9,14 +17,14 @@ export const searchStore = createSlice({
   },
   reducers: {
     //状态同步函数，参数赋值
-    setParams: (state, action) => {
+    setParams: (state, action: PayloadAction<SearchParamsInterface>) => {
       const newParams = action.payload;
       state.address = newParams.address;
       state.time = newParams.time;
       state.people = newParams.people;
     },
   },
-});
+} as SearchStoreType);
 //导出创建的action对象
 export const { setParams } = searchStore.actions;
 //导出reducer

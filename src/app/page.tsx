@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import store from "@/store";
 
 import { Divider } from "antd";
-export default function Home() {
+const Home: React.FC =()=> {
   const isMobile = useIsMobile();
 
   return (
@@ -22,19 +22,21 @@ export default function Home() {
     </div>
   );
 }
-const useIsMobile = () => {
+
+const useIsMobile =()=> {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    const userAgent: string = navigator.userAgent || navigator.vendor || window.opera;
 
     // 使用正则表达式检查常见的移动设备用户代理
-    const mobileRegex =
+    const mobileRegex: RegExp =
       /android|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
-    const isMobileDevice = mobileRegex.test(userAgent.toLowerCase());
+    const isMobileDevice: boolean = mobileRegex.test(userAgent.toLowerCase());
 
     setIsMobile(isMobileDevice);
   }, []);
 
   return isMobile;
 };
+export default Home;

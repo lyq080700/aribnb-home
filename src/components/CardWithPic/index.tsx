@@ -1,6 +1,10 @@
+import React from "react";
 import ImageRatio from "../ImageRatio";
 import { StarFilled } from "@ant-design/icons";
-export default function Card({ className, hotel }) {
+import { RoomInterface } from "@/types/entity";
+
+
+export default function Card({ className, hotel }:{ className?: string, hotel: RoomInterface }):React.ReactElement {
   return (
     <a className={`card cursor-pointer ${className}`}>
       <ImageRatio

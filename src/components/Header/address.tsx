@@ -5,7 +5,19 @@ import ImageRatio from "../ImageRatio";
 import { useDispatch } from "react-redux";
 import { setParams } from "@/store/searchStore";
 import { useSelector } from "react-redux";
-export default function Address(props) {
+type AddressProps = {
+  addressClass: string;
+  handleAddress: () => void;
+  location: string;
+}
+type AddressOptionsProps = {
+  addressActive: boolean;
+  setLocation: (value: string) => void;
+  isMobile: boolean;
+}
+export default function Address(props:AddressProps&AddressOptionsProps) {
+  const dispatch = useDispatch();
+  const searchParams = useSelector((state) => state.searchParams);
   return (
     <div className="relative address" onClick={props.handleAddress}>
       <Item
@@ -14,7 +26,7 @@ export default function Address(props) {
         className={props.addressClass}
         inputNeed={true}
         value={props.location}
-        setValue={(value) => {
+        setValue={(value: string) => {
           props.setLocation(value);
           dispatch(
             setParams({
@@ -34,10 +46,20 @@ export default function Address(props) {
   );
 }
 
-function AddressOptions(props) {
+type Region={
+  name: string;
+  value: string;
+  img: string;
+}
+type City={
+  name: string;
+  value: string;
+}
+
+function AddressOptions(props:AddressOptionsProps) {
   const searchParams = useSelector((state) => state.searchParams);
   const dispatch = useDispatch();
-  const regionData = [
+  const regionData:Array<Region> = [
     {
       name: "随便看看",
       value: "any",
@@ -60,7 +82,7 @@ function AddressOptions(props) {
     },
   ];
 
-  const cityData = [
+  const cityData:Array<City> = [
     { name: "曼谷", value: "bangkok" },
     { name: "巴黎", value: "paris" },
     { name: "伦敦", value: "london" },
@@ -71,7 +93,7 @@ function AddressOptions(props) {
     { name: "香港", value: "hong-kong" },
   ];
   //地址选择
-  const handleRegion = (value, e) => {
+  const handleRegion = (value: Region) => {
     props.setLocation(value.name);
     let country = value.value === "any" ? "" : value.value;
     dispatch(
@@ -81,7 +103,7 @@ function AddressOptions(props) {
       })
     );
   };
-  const handleCity = (value, e) => {
+  const handleCity = (value: City) => {
     props.setLocation(value.name);
     dispatch(
       setParams({

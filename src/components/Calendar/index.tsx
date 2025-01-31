@@ -1,25 +1,29 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./index.scss";
-function Calendar(props) {
+type Props = {
+  defaultValue: Date;
+  onChange: (date: Date) => void;
+}
+function Calendar(props: Props):React.ReactElement {
   const [date, setDate] = useState(new Date(props.defaultValue));
   console.log(date.toLocaleDateString());
   // 上月
-  const lastMonth = () => {
+  const lastMonth = ():void => {
     setDate(new Date(date.getFullYear(), date.getMonth() - 1, 1));
   };
   // 下月
-  const nextMonth = () => {
+  const nextMonth = ():void => {
     setDate(new Date(date.getFullYear(), date.getMonth() + 1, 1));
   };
   // 获取每个月有多少天
-  const daysOfMonth = (year, month) => {
+  const daysOfMonth = (year: number, month: number):number => {
     return new Date(year, month + 1, 0).getDate();
   };
   // 获取每个月第一天是星期几
-  const firstDayOfMonth = (year, month) => {
+  const firstDayOfMonth = (year: number, month: number):number => {
     return new Date(year, month, 1).getDay();
   };
-  const renderDays = () => {
+  const renderDays = ():Array<React.ReactElement> => {
     const days = [];
     const daysCount = daysOfMonth(date.getFullYear(), date.getMonth());
     const firstDays = firstDayOfMonth(date.getFullYear(), date.getMonth());

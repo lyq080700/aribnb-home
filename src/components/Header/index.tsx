@@ -3,29 +3,29 @@ import Item from "./item";
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { setParams } from "@/store/searchStore";
-import { useSelector } from "react-redux";
+import { useTypedSelector } from "@/store";
 import Address from "./address";
 import People from "./people";
 import "./index.scss";
-export default function Header({ isMobile }) {
+export default function Header({ isMobile }: { isMobile: boolean }):React.ReactElement {
   const searchBoxRef = useRef(null);
   // 搜索框提示选项框设置
-  const [addressActive, setAddressActive] = useState(false);
-  const [timeActive, setTimeActive] = useState(false);
-  const [peopleActive, setPeopleActive] = useState(false);
+  const [addressActive, setAddressActive] = useState<boolean>(false);
+  const [timeActive, setTimeActive] = useState<boolean>(false);
+  const [peopleActive, setPeopleActive] = useState<boolean>(false);
   // 搜索框激活状态样式设置
-  const [activated, setActivated] = useState(false);
-  const [addressClass, setAddressClass] = useState("");
-  const [timeClass, setTimeClass] = useState("");
-  const [peopleClass, setPeopleClass] = useState("");
+  const [activated, setActivated] = useState<boolean>(false);
+  const [addressClass, setAddressClass] = useState<string>("");
+  const [timeClass, setTimeClass] = useState<string>("");
+  const [peopleClass, setPeopleClass] = useState<string>("");
   const activateClass =
     "bg-white rounded-[32px] hover:bg-white shadow-md shadow-[#ddd]";
   const hoverClass = "hover:bg-[#ddd]";
   //获取搜索参数
-  const searchParams = useSelector((state) => state.searchParams);
+  const searchParams = useTypedSelector((state) => state.searchParams);
   const dispatch = useDispatch();
-  const [location, setLocation] = useState("");
-  const [peopleText, setPeopleText] = useState("");
+  const [location, setLocation] = useState<string>("");
+  const [peopleText, setPeopleText] = useState<string>("");
   const [people, setPeople] = useState({
     adult: 0,
     child: 0,
@@ -65,7 +65,7 @@ export default function Header({ isMobile }) {
   };
   //点击空白区域关闭激活
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleClickOutside = (event: MouseEvent) => {
       if (
         searchBoxRef.current &&
         !searchBoxRef.current.contains(event.target)
@@ -87,7 +87,7 @@ export default function Header({ isMobile }) {
     };
   }, []);
 
-  const handleTimeOnChange = (date, dateString) => {
+  const handleTimeOnChange = (dateString:string,date:Date):void => {
     console.log(date, dateString);
     dispatch(
       setParams({

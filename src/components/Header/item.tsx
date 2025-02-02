@@ -13,7 +13,7 @@ type ItemProps = {
   className?: string;
   inputNeed?: boolean;
   value: string;
-  setValue?: (value:string,date?:Date) => void;
+  setValue?: (value:string|string[],date?: Date) => void;
 }
 export default function Item({
   title,
@@ -34,12 +34,12 @@ export default function Item({
           placeholder={placholder}
           type="text"
           value={value}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) => setValue?.(e.target.value)}
         />
       ) : title === "日期" ? (
         <ConfigProvider locale={locale}>
           <RangePicker
-            placeholder={placholder}
+            placeholder={[placholder, placholder]}
             suffixIcon=""
             onChange={setValue}
           />

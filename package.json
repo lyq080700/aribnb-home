@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@types/mockjs": "^1.0.10",
     "@types/node": "^22.10.7",
     "@types/react": "^19.0.7",
     "eslint": "^9",

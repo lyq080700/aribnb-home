@@ -8,7 +8,7 @@ import Address from "./address";
 import People from "./people";
 import "./index.scss";
 export default function Header({ isMobile }: { isMobile: boolean }):React.ReactElement {
-  const searchBoxRef = useRef(null);
+  const searchBoxRef = useRef<HTMLDivElement>(null);
   // 搜索框提示选项框设置
   const [addressActive, setAddressActive] = useState<boolean>(false);
   const [timeActive, setTimeActive] = useState<boolean>(false);
@@ -68,7 +68,7 @@ export default function Header({ isMobile }: { isMobile: boolean }):React.ReactE
     const handleClickOutside = (event: MouseEvent) => {
       if (
         searchBoxRef.current &&
-        !searchBoxRef.current.contains(event.target)
+        !searchBoxRef.current.contains(event.target as Node)
       ) {
         setActivated(false);
         setAddressClass("");
@@ -87,12 +87,12 @@ export default function Header({ isMobile }: { isMobile: boolean }):React.ReactE
     };
   }, []);
 
-  const handleTimeOnChange = (dateString:string,date:Date):void => {
-    console.log(date, dateString);
+  const handleTimeOnChange = (value:string[],date:Date):void => {
+    console.log(date, value);
     dispatch(
       setParams({
         ...searchParams,
-        time: { start: dateString[0], end: dateString[1] },
+        time: { start: value[0], end: value[1] },
       })
     );
   };

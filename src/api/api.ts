@@ -3,10 +3,17 @@
  */
 
 import request from "./request";
+import {SearchParamsInterface} from "@/types/entity";
+export enum API {
+  getRoomDataAPI = "/roomList/filter/",
+  getAllRoomDataAPI = "/roomList/",
+}
+
+
 //根据请求参数筛选房源信息
-export const getRoomDataAPI = (params) => {
+export const getRoomDataAPI = (params:SearchParamsInterface) => {
   return request({
-    url: "/roomList/filter/",
+    url: API.getRoomDataAPI,
     method: "post",
     data: params,
   });
@@ -14,7 +21,7 @@ export const getRoomDataAPI = (params) => {
 //获取所有房源信息
 export const getAllRoomDataAPI = () => {
   return request({
-    url: "/roomList/",
+    url: API.getAllRoomDataAPI,
     method: "get",
   });
 };

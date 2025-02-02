@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios,{AxiosRequestConfig,AxiosError,AxiosResponse} from "axios";
+import {Result} from "@/types/entity";
 const instance = axios.create({
   baseURL: "http://localhost:3000/api",
   timeout: 3000,
@@ -16,7 +17,7 @@ instance.interceptors.request.use(
 );
 // 添加响应拦截器
 instance.interceptors.response.use(
-  function (response) {
+  function (response: AxiosResponse<Result>) {
     // 对响应数据做点什么
     const { code, data, message } = response.data;
     if (data && code == 200) {
@@ -32,14 +33,14 @@ instance.interceptors.response.use(
     try {
       errMsg = response?.data?.message || message;
     } catch (error) {
-      throw new Error(error);
+      throw new Error(error as unknown as string);
     }
     return Promise.reject(error);
   }
 );
 
 //给外部使用的请求方法
-function request(config) {
+function request(config:AxiosRequestConfig){
   config.method = config.method || "get";
   return instance(config);
 }

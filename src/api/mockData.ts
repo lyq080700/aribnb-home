@@ -1,11 +1,10 @@
-const roomAllData = () => {
+import {HotelInterface,RoomInterface,SearchParamsInterface,Result,CommonRoomDetailInterface} from "@/types/entity";
+const roomAllData: () => HotelInterface[] = () => {
   return [
     {
       title: "英国 彭布罗克(Pembroke)",
-
       country: "UK",
       city: "pembroke",
-
       listingRoom: [
         {
           name: "The Willow",
@@ -19,7 +18,7 @@ const roomAllData = () => {
           pets: 0,
           price: "￥2,216/晚",
           img: "https://z1.muscache.cn/im/pictures/miso/Hosting-39113140/original/6b132777-3c7a-4007-83cb-477de0a136d6.jpeg?im_w=720&im_format=avif",
-          descriptions: "「The Willow」地理位置优越，景色迷人",
+          description: "「The Willow」地理位置优越，景色迷人",
           review: "小屋非常整洁干净，如图所示",
         },
         {
@@ -34,7 +33,7 @@ const roomAllData = () => {
           pets: 0,
           price: "￥1,234/晚",
           img: "https://z1.muscache.cn/im/pictures/miso/Hosting-24873113/original/7bd81aac-eaba-4bfa-9d51-ce4e4c4b84c3.jpeg",
-          descriptions: "Rising Ridge小屋| Hocking Hills",
+          description: "Rising Ridge小屋| Hocking Hills",
           review: "一切都干净整洁，看起来是全新的",
         },
       ],
@@ -58,7 +57,7 @@ const roomAllData = () => {
           pets: 0,
           price: "￥489.33/月",
           img: "https://z1.muscache.cn/im/pictures/40e9a26e-4f49-4b1a-9066-3e249ddcb1ab.jpg?im_w=720&im_format=avif",
-          descriptions: "1 张约 1.35 米宽双人床共用卫生间",
+          description: "1 张约 1.35 米宽双人床共用卫生间",
           review: "绝对是五星好评！！！👍❤️",
         },
         {
@@ -73,7 +72,7 @@ const roomAllData = () => {
           pets: 0,
           price: "￥386.8/晚",
           img: "https://z1.muscache.cn/im/pictures/miso/Hosting-24873113/original/7bd81aac-eaba-4bfa-9d51-ce4e4c4b84c3.jpeg",
-          descriptions: "1 张约 1.35 米宽双人床房客专用卫生间",
+          description: "1 张约 1.35 米宽双人床房客专用卫生间",
           review: "Alfred和Patricia是出色的房东。",
         },
       ],
@@ -96,7 +95,7 @@ const roomAllData = () => {
           pets: 2,
           price: "￥958/晚",
           img: "https://a0.muscache.com/im/pictures/miso/Hosting-24415592/original/8e6a93be-f8c1-4143-ae6e-a9f5378c0d83.jpeg",
-          descriptions: "「强烈推荐，享受一次难忘的体验",
+          description: "「强烈推荐，享受一次难忘的体验",
           review: "配备了我们住宿所需的一切",
         },
         {
@@ -111,7 +110,7 @@ const roomAllData = () => {
           pets: 0,
           price: "￥649/晚",
           img: "https://z1.muscache.cn/im/pictures/miso/Hosting-24415592/original/6241c463-a8de-41f3-b369-519c99444fac.jpeg",
-          descriptions: "新建！景观！优雅舒适！ - RR",
+          description: "新建！景观！优雅舒适！ - RR",
           review: "一切都干净整洁，看起来是全新的",
         },
       ],
@@ -134,7 +133,7 @@ const roomAllData = () => {
           pets: 0,
           price: "￥480/晚",
           img: "https://z1.muscache.cn/im/pictures/miso/Hosting-21838230/original/32701fa5-6972-4439-99b0-e9e8ca7792e7.jpeg?im_w=720&im_format=avif",
-          descriptions: "2 张床卧室私用卫生间",
+          description: "2 张床卧室私用卫生间",
           review: "阿斯托里亚之家」二楼，阳光充足，可欣赏宁静街道的美景。 ",
         },
         {
@@ -149,7 +148,7 @@ const roomAllData = () => {
           pets: 0,
           price: "￥649/晚",
           img: "https://z1.muscache.cn/im/pictures/prohost-api/Hosting-1141624463407635141/original/a9a31bc3-4e0c-4bdc-bbce-717b45e2152d.jpeg?im_w=720&im_format=avif",
-          descriptions: "6 位房客3 间卧室3 张床2 个卫生间",
+          description: "6 位房客3 间卧室3 张床2 个卫生间",
           review: "走进纽约市中心！",
         },
       ],
@@ -171,7 +170,7 @@ const roomAllData = () => {
           pets: 0,
           price: "￥302/晚",
           img: "https://z1.muscache.cn/im/pictures/67ef8796-2113-4803-b66e-6d7d0594ef7e.jpg?im_w=720&im_format=avif",
-          descriptions: "1 位房客2 间卧室16 张床",
+          description: "1 位房客2 间卧室16 张床",
           review: "建筑是实打实的和风，每一部分都透露着历史感",
         },
         {
@@ -186,7 +185,7 @@ const roomAllData = () => {
           pets: 0,
           price: "￥199/晚",
           img: "https://z1.muscache.cn/im/pictures/miso/Hosting-1140861764181961425/original/f84e9e9b-8482-49b3-b75c-51ede30cd173.jpeg?im_w=720&im_format=avif",
-          descriptions: "1 位房客29 间卧室29 张床5 个公共卫生间",
+          description: "1 位房客29 间卧室29 张床5 个公共卫生间",
           review: "非常干净与安静的住所，配备用品齐全",
         },
       ],
@@ -209,7 +208,7 @@ const roomAllData = () => {
           pets: 0,
           price: "￥480/晚",
           img: "https://z1.muscache.cn/im/pictures/miso/Hosting-51997179/original/c0dad979-68ed-4d7d-ae30-88e1d7521bab.jpeg?im_w=720&im_format=avif",
-          descriptions: "2 位房客1 间卧室1 张床1 个独立卫生间",
+          description: "2 位房客1 间卧室1 张床1 个独立卫生间",
           review: "衛生方面要更注意，床單上有污漬 ",
         },
         {
@@ -224,7 +223,7 @@ const roomAllData = () => {
           pets: 0,
           price: "￥274/晚",
           img: "https://z1.muscache.cn/im/pictures/miso/Hosting-577838174950054248/original/280ec0b3-55b6-47c6-8ef7-c47a5e8e6bba.jpeg?im_w=720&im_format=avif",
-          descriptions: "2 位房客1 间卧室1 张床1 个独立卫生间",
+          description: "2 位房客1 间卧室1 张床1 个独立卫生间",
           review: "我有很多爱彼迎房源，这是爱彼迎房源之一！",
         },
       ],
@@ -246,7 +245,7 @@ const roomAllData = () => {
           pets: 2,
           price: "￥871/晚",
           img: "https://z1.muscache.cn/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTIxMjc5OTQ1Njk0OTg5MjI3NA%3D%3D/original/52630c3b-58d1-4a15-a259-230402dc4f8b.jpeg?im_w=720&im_format=avif",
-          descriptions: "3 间卧室3 张床3 个卫生间",
+          description: "3 间卧室3 张床3 个卫生间",
           review: "可能是我住过最好的爱彼迎房源 ",
         },
         {
@@ -261,7 +260,7 @@ const roomAllData = () => {
           pets: 0,
           price: "￥775/晚",
           img: "https://z1.muscache.cn/im/pictures/f260f28d-3ed3-4d97-afad-fd669b8ea59b.jpg?im_w=720&im_format=avif",
-          descriptions: "1 张约 1.35 米宽双人床卧室,私用卫生间",
+          description: "1 张约 1.35 米宽双人床卧室,私用卫生间",
           review: "居住所在地位置非常完美，街道很热闹",
         },
       ],
@@ -283,7 +282,7 @@ const roomAllData = () => {
           pets: 0,
           price: "￥231/晚",
           img: "https://z1.muscache.cn/im/pictures/miso/Hosting-1077066160280158672/original/00e0f942-d1e5-4423-b8f8-ba894a8a02bd.jpeg?im_w=720&im_format=avif",
-          descriptions: "1 张床4 个共用卫生间",
+          description: "1 张床4 个共用卫生间",
           review: "非常棒，便宜！而且 条件很不错，房间宽敞明亮 ",
         },
         {
@@ -298,7 +297,7 @@ const roomAllData = () => {
           pets: 0,
           price: "￥480/晚",
           img: "https://z1.muscache.cn/im/pictures/miso/Hosting-47945468/original/3583e8f6-a4ad-4c06-87bd-0d967eba44f9.jpeg?im_w=720&im_format=avif",
-          descriptions: "1 张床4 个共用卫生间",
+          description: "1 张床4 个共用卫生间",
           review:
             "是一间社区风格的小屋，专为热衷于结识来自不同国家的人的旅客而设计。 ",
         },
@@ -314,7 +313,7 @@ const roomAllData = () => {
           pets: 0,
           price: "￥1,028/晚",
           img: "https://z1.muscache.cn/im/pictures/miso/Hosting-49863259/original/e8bdf4f6-0b94-4712-809e-bb4b56e8d257.jpeg?im_w=720&im_format=avif",
-          descriptions: "2 位房客单间公寓1 张床1 间卫生间",
+          description: "2 位房客单间公寓1 张床1 间卫生间",
           review: "地理位置一流，靠近许多购物中心，这是一个巨大的优势 ",
         },
       ],
@@ -323,14 +322,14 @@ const roomAllData = () => {
 };
 
 //根据日期筛选房源
-const filterTime = (array, time) => {
+const filterTime:(array:RoomInterface[],time: SearchParamsInterface["time"])=>RoomInterface[] = (array, time) => {
   const newRoom = array.filter((item, index) => {
     return item.checkin <= time.start && item.checkout >= time.start;
   });
   return newRoom;
 };
 //根据人数筛选房源
-const filterPeople = (array, people) => {
+const filterPeople:(array:RoomInterface[],time: SearchParamsInterface["people"])=>RoomInterface[] = (array, people) => {
   const newRoom = array.filter((item, index) => {
     return (
       item.adults >= people.adult &&
@@ -343,14 +342,14 @@ const filterPeople = (array, people) => {
 };
 
 //根据搜索参数获取房源数据
-export const getRoomData = (config) => {
-  const { address, time, people } = JSON.parse(config.body);
+export const getRoomData:(config:any)=>Result<RoomInterface[]>= (config) => {
+  const { address, time, people } = JSON.parse(config.body) as SearchParamsInterface;
   console.log(address, time, people);
-  const roomDataAll = roomAllData();
-  const newRoomData = [];
+  const roomDataAll:HotelInterface[] = roomAllData();
+  const newRoomData:RoomInterface[] = [];
   //根据地点获取房源信息
   roomDataAll.forEach((item, index) => {
-    let newItem = {
+    let newItem : RoomInterface|CommonRoomDetailInterface = {
       title: item.title,
       country: item.country,
       city: item.city,
@@ -361,7 +360,7 @@ export const getRoomData = (config) => {
         const newRoomWithPeople = filterPeople(newRoomWithTime, people);
         newRoomWithPeople.forEach((listItem) => {
           newItem = { ...newItem, ...listItem };
-          newRoomData.push(newItem);
+          newRoomData.push(newItem as RoomInterface);
         });
       }
     } else {
@@ -373,7 +372,7 @@ export const getRoomData = (config) => {
         const newRoomWithPeople = filterPeople(newRoomWithTime, people);
         newRoomWithPeople.forEach((listItem) => {
           newItem = { ...newItem, ...listItem };
-          newRoomData.push(newItem);
+          newRoomData.push(newItem as RoomInterface);
         });
       } else if (
         address.country === "southeast-asia" &&
@@ -385,7 +384,7 @@ export const getRoomData = (config) => {
         const newRoomWithPeople = filterPeople(newRoomWithTime, people);
         newRoomWithPeople.forEach((listItem) => {
           newItem = { ...newItem, ...listItem };
-          newRoomData.push(newItem);
+          newRoomData.push(newItem as RoomInterface);
         });
       } else {
         if (item.country.includes(address.country)) {
@@ -393,7 +392,7 @@ export const getRoomData = (config) => {
           const newRoomWithPeople = filterPeople(newRoomWithTime, people);
           newRoomWithPeople.forEach((listItem) => {
             newItem = { ...newItem, ...listItem };
-            newRoomData.push(newItem);
+            newRoomData.push(newItem as RoomInterface);
           });
         }
       }
@@ -403,30 +402,28 @@ export const getRoomData = (config) => {
   return {
     code: 200,
     data: newRoomData,
-    messgae: "获取成功",
+    message: "获取成功",
   };
 };
 
 //获取全部房源数据
-export const getAllRoomData = () => {
-  const roomDataAll = roomAllData();
-  const newRoomData = [];
+export const getAllRoomData:()=>Result<RoomInterface[]> = () => {
+  const roomDataAll:HotelInterface[] = roomAllData();
+  const newRoomData:RoomInterface[] = [];
   roomDataAll.forEach((item, index) => {
-    let newItem = {
+    let newItem : RoomInterface|CommonRoomDetailInterface= {
       title: item.title,
-      mapInfo: item.mapInfo,
       country: item.country,
       city: item.city,
-      avgRating: item.avgRating,
     };
     item.listingRoom.forEach((listItem) => {
-      newItem = { ...newItem, ...listItem };
-      newRoomData.push(newItem);
+      newItem = { ...newItem, ...listItem, mapInfo: listItem.mapInfo,avgRating: listItem.avgRating, };
+      newRoomData.push(newItem as RoomInterface);
     });
   });
   return {
     code: 200,
     data: newRoomData,
-    messgae: "获取成功",
+    message: "获取成功",
   };
 };

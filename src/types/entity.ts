@@ -14,8 +14,13 @@ export interface SearchParamsInterface {
         pet: number;
     };
 }
+export interface CommonRoomDetailInterface {
+    title: string;
+    country: string;
+    city: string;
+}
 
-export interface RoomInterface {
+export interface RoomInterface{
     name: string;
     adults: number;
     mapInfo: string;
@@ -29,14 +34,15 @@ export interface RoomInterface {
     img: string;
     description: string;
     review: string;
-    title: string;
-    country: string;
-    city: string;
 }
 
-export interface HotelInterface {
-    title: string;
-    country: string;
-    city: string;
-   listingRoom: RoomInterface[]
+
+export interface HotelInterface extends CommonRoomDetailInterface {
+    listingRoom: RoomInterface[]
+}
+
+export interface Result<T= any> {
+    code: number;
+    message: string;
+    data?: T;
 }
